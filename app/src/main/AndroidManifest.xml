@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.usach.sebastianvallejos.scap_apoderados">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Activities.MainMenuActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activities.HomeworkActivity" />
+        <activity android:name=".Activities.ExamActivity" />
+        <activity android:name=".Activities.MaterialActivity" />
+        <activity android:name=".Activities.SESActivity" />
+        <activity android:name=".Activities.DetailHomeworkActivity" />
+        <activity android:name=".Activities.DetailSESActivity" />
+        <activity android:name=".Activities.DetailExamActivity" />
+        <activity android:name=".Activities.DetailMaterialActivity"></activity>
+    </application>
+
+</manifest>

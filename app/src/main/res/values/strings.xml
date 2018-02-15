@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">SCAP - Apoderados</string>
+    <string name="Saludo_inicial">¡Bienvenido apoderado!</string>
+    <string name="Descripcion_inicial">Dentro de esta aplicacion puedes revisar las diferentes actividades que los profesores han diseñado para tus hijos.</string>
+    <string name="Titulo_tareas">Tareas</string>
+    <string name="Descripcion_tareas">Dentro de esta sección puedes ver las diferentes tareas que los profesores les han asignado a tus hijos como también sus fechas de entrega.</string>
+    <string name="Titulo_SES">Estudio Semanal</string>
+    <string name="Descripcion_SES">Dentro de esta sección puedes revisar las actividades que los profesores han diseñado especialmente para sus hijos, es muy importante realizar estas mismas, ya que ayuda mucho al profesor a mejorar su clase y por ende, la educación de sus hijos.</string>
+    <string name="Titulo_materiales">Materiales</string>
+    <string name="Descripcion_materiales">Dentro de esta sección puede ver que materiales les han sido solicitado por diferentes profesores y para cuando estos han sido pedidos.</string>
+    <string name="Titulo_pruebas">Pruebas</string>
+    <string name="Titulo_prueba">Prueba</string>
+    <string name="Descripcion_pruebas">Dentro de esta sección puedes ver las pruebas a evaluar por los profesores, en conjunto con su temario y cuando estas serán evaluadas.</string>
+    <string name="Titulo">Título:</string>
+    <string name="Materia">Materia:</string>
+    <string name="Fecha">Fecha:</string>
+    <string name="Descripcion">Descripción:</string>
+    <string name="Dos_puntos">:</string>
+    <string name="Entendio">Entendió</string>
+    <string name="No_entendio">No entendió</string>
+</resources>
