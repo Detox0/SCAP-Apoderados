@@ -12,18 +12,20 @@ public class Actividad {
     private String profesor;
     private String tipo;
     private String descripcion;
+    private String fecha;
 
     //Constructor requerido por FireBase
     public Actividad(){}
 
     //Constructor con asignacion de atributos incluidos
-    public Actividad(String section, String subject, String proffesor, String type, String description)
+    public Actividad(String section, String subject, String proffesor, String type, String description, String date)
     {
         this.seccion = section;
         this.materia = subject;
         this.profesor = proffesor;
         this.tipo = type;
         this.descripcion = description;
+        this.fecha = date;
 
     }
 
@@ -33,5 +35,6 @@ public class Actividad {
     public String getProfesor() { return this.profesor; }
     public String getTipo() { return this.tipo; }
     public String getDescripcion() { return this.descripcion; }
+    public String getFecha(){ return this.fecha; }
 
 }

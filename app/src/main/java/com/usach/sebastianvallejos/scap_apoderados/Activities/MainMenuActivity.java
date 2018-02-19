@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.firebase.database.FirebaseDatabase;
 import com.usach.sebastianvallejos.scap_apoderados.Models.Alumnos;
 import com.usach.sebastianvallejos.scap_apoderados.R;
 
@@ -18,7 +20,7 @@ public class MainMenuActivity extends AppCompatActivity {
     private ImageButton botonHomework;
     private ImageButton botonMaterials;
     private ImageButton botonExams;
-    private Alumnos alumnoActual;
+    private Alumnos alumnoActual = new Alumnos("1","Joaquin","Montero","Arroyo","4B","Instituto Nacional");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +51,18 @@ public class MainMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(MainMenuActivity.this , SESActivity.class);
+                Intent intent = new Intent(MainMenuActivity.this , HomeworkActivity.class);
 
                 try
                 {
+                    intent.putExtra("id",alumnoActual.getId());
+                    intent.putExtra("nombre",alumnoActual.getNombre());
+                    intent.putExtra("aPaterno",alumnoActual.getApellidoPaterno());
+                    intent.putExtra("aMaterno",alumnoActual.getApellidoMaterno());
+                    intent.putExtra("seccion",alumnoActual.getSeccion());
+                    intent.putExtra("colegio",alumnoActual.getColegio());
+
+
                     startActivity(intent);
                 }
                 catch (Exception e)
@@ -75,6 +85,13 @@ public class MainMenuActivity extends AppCompatActivity {
 
                 try
                 {
+                    intent.putExtra("id",alumnoActual.getId());
+                    intent.putExtra("nombre",alumnoActual.getNombre());
+                    intent.putExtra("aPaterno",alumnoActual.getApellidoPaterno());
+                    intent.putExtra("aMaterno",alumnoActual.getApellidoMaterno());
+                    intent.putExtra("seccion",alumnoActual.getSeccion());
+                    intent.putExtra("colegio",alumnoActual.getColegio());
+
                     startActivity(intent);
                 }
                 catch (Exception e)
@@ -97,7 +114,17 @@ public class MainMenuActivity extends AppCompatActivity {
 
                 try
                 {
+                    //Se le pasan los parametros necesarios a la siguiente activity
+                    intent.putExtra("id",alumnoActual.getId());
+                    intent.putExtra("nombre",alumnoActual.getNombre());
+                    intent.putExtra("aPaterno",alumnoActual.getApellidoPaterno());
+                    intent.putExtra("aMaterno",alumnoActual.getApellidoMaterno());
+                    intent.putExtra("seccion",alumnoActual.getSeccion());
+                    intent.putExtra("colegio",alumnoActual.getColegio());
+
+                    //Se inicia la siguiente activity
                     startActivity(intent);
+                    finish();
                 }
                 catch (Exception e)
                 {
@@ -119,6 +146,13 @@ public class MainMenuActivity extends AppCompatActivity {
 
                 try
                 {
+                    intent.putExtra("id",alumnoActual.getId());
+                    intent.putExtra("nombre",alumnoActual.getNombre());
+                    intent.putExtra("aPaterno",alumnoActual.getApellidoPaterno());
+                    intent.putExtra("aMaterno",alumnoActual.getApellidoMaterno());
+                    intent.putExtra("seccion",alumnoActual.getSeccion());
+                    intent.putExtra("colegio",alumnoActual.getColegio());
+
                     startActivity(intent);
                 }
                 catch (Exception e)
