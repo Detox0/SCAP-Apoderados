@@ -20,12 +20,17 @@ public class MainMenuActivity extends AppCompatActivity {
     private ImageButton botonHomework;
     private ImageButton botonMaterials;
     private ImageButton botonExams;
-    private Alumnos alumnoActual = new Alumnos("1","Joaquin","Montero","Arroyo","4B","Instituto Nacional");
+    private Alumnos alumnoActual = new Alumnos();
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+        intent = getIntent();
+
+        //Se obtienen los datos del alumno
+        crearAlumno();
 
         //Se asignan botones desde la vista mediante el ID del boton
         botonSes = (ImageButton) findViewById(R.id.boton_ses);
@@ -39,8 +44,16 @@ public class MainMenuActivity extends AppCompatActivity {
         activarBotonHomework(botonHomework);
         activarBotonMaterials(botonMaterials);
 
+    }
 
-
+    private void crearAlumno()
+    {
+        alumnoActual.setId(intent.getStringExtra("id"));
+        alumnoActual.setNombre(intent.getStringExtra("nombre"));
+        alumnoActual.setColegio(intent.getStringExtra("colegio"));
+        alumnoActual.setSeccion(intent.getStringExtra("seccion"));
+        alumnoActual.setApellidoPaterno(intent.getStringExtra("apellidoPaterno"));
+        alumnoActual.setApellidoMaterno(intent.getStringExtra("apellidoMaterno"));
     }
 
     //Aqui se le dice al boton SES donde debe dirigirse una vez pulsado y se le entregan algunos atributos

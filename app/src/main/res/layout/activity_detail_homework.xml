@@ -38,7 +38,7 @@
                     android:textSize="18dp"
                     android:layout_marginLeft="16dp"
                     android:textColor="@color/blanco"
-                    android:text="@string/Titulo"/>
+                    android:text="@string/Profesor"/>
 
             </LinearLayout>
 
@@ -47,6 +47,14 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:layout_marginLeft="16dp">
+
+                <TextView
+                    android:id="@+id/detalle_tareas_profesor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/blanco"
+                    android:textSize="16dp"/>
 
             </LinearLayout>
 
@@ -79,6 +87,14 @@
                 android:layout_weight="2"
                 android:layout_marginLeft="16dp">
 
+                <TextView
+                    android:id="@+id/detalle_tareas_materia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/blanco"
+                    android:textSize="16dp"/>
+
             </LinearLayout>
 
 
@@ -110,6 +126,14 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:layout_marginLeft="16dp">
+
+                <TextView
+                    android:id="@+id/detalle_tareas_fecha"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/blanco"
+                    android:textSize="16dp"/>
 
             </LinearLayout>
 
@@ -149,7 +173,6 @@
                 android:layout_marginTop="6dp"
                 android:layout_marginBottom="6dp"
                 android:textSize="16dp"/>
-
 
         </LinearLayout>
 

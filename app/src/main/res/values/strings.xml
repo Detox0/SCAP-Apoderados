@@ -18,4 +18,13 @@
     <string name="Dos_puntos">:</string>
     <string name="Entendio">Entendió</string>
     <string name="No_entendio">No entendió</string>
+    <string name="Profesor">Profesor:</string>
+    <string name="Bienvenido">¡Bienvenido!</string>
+    <string name="Descripcion_login">Porfavor introduzca su correo y contraseña para continuar.</string>
+    <string name="Email_hint">ejemplo@dominio.cl</string>
+    <string name="SignIn">Registrarse</string>
+    <string name="Bien">¡Bien!</string>
+    <string name="Done">Hecho</string>
+    <string name="Descripcion_hijos_2">Ahora, porfavor proceda a escoger por cual estudiante debiese consultar la aplicación.</string>
+    <string name="Descripcion_hijos_1">Primero, seleccione el colegio al cual sus hijos asisten.</string>
 </resources>

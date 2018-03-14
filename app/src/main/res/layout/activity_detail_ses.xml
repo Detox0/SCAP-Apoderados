@@ -38,7 +38,7 @@
                     android:textSize="18dp"
                     android:layout_marginLeft="16dp"
                     android:textColor="@color/blanco"
-                    android:text="@string/Titulo"/>
+                    android:text="@string/Profesor"/>
 
             </LinearLayout>
 

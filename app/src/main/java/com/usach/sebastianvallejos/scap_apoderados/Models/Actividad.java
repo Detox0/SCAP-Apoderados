@@ -37,4 +37,12 @@ public class Actividad {
     public String getDescripcion() { return this.descripcion; }
     public String getFecha(){ return this.fecha; }
 
+    //Setters para guardar datos de las actividades
+    public void setDescripcion(String desc){ this.descripcion = desc; }
+    public void setMateria(String mat){ this.materia = mat; }
+    public void setProfesor(String prof){ this.profesor = prof; }
+    public void setTipo(String type){ this.tipo = type; }
+    public void setFecha(String date){ this.fecha = date; }
+    public void setSeccion(String section){ this.seccion = section; }
+
 }

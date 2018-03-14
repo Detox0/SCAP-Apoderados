@@ -10,11 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Activities.MainMenuActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Activities.HomeworkActivity" />
         <activity android:name=".Activities.ExamActivity" />
@@ -23,7 +19,14 @@
         <activity android:name=".Activities.DetailHomeworkActivity" />
         <activity android:name=".Activities.DetailSESActivity" />
         <activity android:name=".Activities.DetailExamActivity" />
-        <activity android:name=".Activities.DetailMaterialActivity"></activity>
+        <activity android:name=".Activities.DetailMaterialActivity" />
+        <activity android:name=".Activities.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activities.HijosActivity"></activity>
     </application>
 
 </manifest>
