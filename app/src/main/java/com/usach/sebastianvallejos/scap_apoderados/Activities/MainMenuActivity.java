@@ -64,7 +64,7 @@ public class MainMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(MainMenuActivity.this , HomeworkActivity.class);
+                Intent intent = new Intent(MainMenuActivity.this , SESActivity.class);
 
                 try
                 {

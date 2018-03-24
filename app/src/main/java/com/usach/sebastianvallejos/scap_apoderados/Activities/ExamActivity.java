@@ -20,12 +20,17 @@ import com.usach.sebastianvallejos.scap_apoderados.Models.Actividad;
 import com.usach.sebastianvallejos.scap_apoderados.Models.Alumnos;
 import com.usach.sebastianvallejos.scap_apoderados.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class ExamActivity extends AppCompatActivity {
 
     //Variables a utilizar
     private Intent intent;
     private FirebaseDatabase mDataBase = FirebaseDatabase.getInstance();
     private Alumnos alumno = new Alumnos();
+    private String fecha;
     private LinearLayout exams_layout;
     private LinearLayout exams_fechas_layout;
 
@@ -39,12 +44,16 @@ public class ExamActivity extends AppCompatActivity {
         exams_layout = (LinearLayout) findViewById(R.id.exams_layout);
         exams_fechas_layout = (LinearLayout) findViewById(R.id.exams_fechas_layout);
 
+        //Obtenemos la fecha actual
+        Date tiempo = Calendar.getInstance().getTime();
+        fecha = new SimpleDateFormat("yyyy/MM/dd").format(tiempo);
+
         crearAlumno();
     }
 
     private void crearAlumno()
     {
-        alumno.setId(intent.getStringExtra("id").toString());
+        alumno.setId(intent.getStringExtra("id"));
         alumno.setNombre(intent.getStringExtra("nombre"));
         alumno.setSeccion(intent.getStringExtra("seccion"));
         alumno.setColegio(intent.getStringExtra("colegio"));
@@ -67,11 +76,10 @@ public class ExamActivity extends AppCompatActivity {
                 //Por cada actividad encontrada, se guarda en una lista de elementos "Actividad"
                 Actividad actividad = dataSnapshot.getValue(Actividad.class);
 
-                if(actividad.getTipo().equals("Pruebas"))
+                //Vemos si la actividad es una prueba y si la fecha actual no es mayor que la fecha de la actividad
+                if(actividad.getTipo().equals("Pruebas") && (actividad.getFecha().compareTo(fecha) != -1))
                 {
                     crearInformacionVista(actividad);
-                }else{
-
                 }
             }
 
@@ -119,7 +127,7 @@ public class ExamActivity extends AppCompatActivity {
         textoFecha.setTextColor(Color.parseColor("#FFFFFF"));
 
         //SE NECESITA CAMBIAR A DP
-        textoFecha.setTextSize(35);
+        textoFecha.setTextSize(30);
 
         exams_fechas_layout.addView(textoFecha,params);
     }

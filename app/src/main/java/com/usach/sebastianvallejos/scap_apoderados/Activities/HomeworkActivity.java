@@ -23,8 +23,11 @@ import com.usach.sebastianvallejos.scap_apoderados.Models.Actividad;
 import com.usach.sebastianvallejos.scap_apoderados.Models.Alumnos;
 import com.usach.sebastianvallejos.scap_apoderados.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -35,12 +38,17 @@ public class HomeworkActivity extends AppCompatActivity {
     private Intent intent;
     final FirebaseDatabase mDataBase = FirebaseDatabase.getInstance();
     private Alumnos alumnoActual = new Alumnos();
+    private String fecha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homework);
         intent = getIntent();
+
+        //Obtenemos la fecha actual
+        Date tiempo = Calendar.getInstance().getTime();
+        fecha = new SimpleDateFormat("yyyy/MM/dd").format(tiempo);
 
         //Recuperamos los datos de la actividad anterior y creamos un alumno
         crearAlumno(intent);
@@ -53,7 +61,7 @@ public class HomeworkActivity extends AppCompatActivity {
 
     private void crearAlumno(Intent in)
     {
-        alumnoActual.setId(in.getStringExtra("id").toString());
+        alumnoActual.setId(in.getStringExtra("id"));
         alumnoActual.setNombre(in.getStringExtra("nombre"));
         alumnoActual.setSeccion(in.getStringExtra("seccion"));
         alumnoActual.setColegio(in.getStringExtra("colegio"));
@@ -62,7 +70,8 @@ public class HomeworkActivity extends AppCompatActivity {
     }
 
     //Funcion encargada de obtener todas las actividades para un colegio y seccion en especifico
-    private void obtenerActividades(String colegio, String seccion){
+    private void obtenerActividades(String colegio, String seccion)
+    {
 
         DatabaseReference actividadesRef = mDataBase.getReference(colegio);
 
@@ -73,15 +82,16 @@ public class HomeworkActivity extends AppCompatActivity {
                 //Por cada actividad encontrada, se guarda en una lista de elementos "Actividad"
                 Actividad actividad = dataSnapshot.getValue(Actividad.class);
 
-                Log.i("AC","Se encontro: "+actividad.getTipo());
+                Log.i("PRUEBA","Se ha encontrado una actividad la cual es:" +actividad.getTipo());
+                Log.i("PRUEBA","Se ha obtenido una actividad con la siguiente fecha: "+actividad.getFecha());
+                Log.i("PRUEBA","La fecha actual es: "+fecha);
+                Log.i("PRUEBA","La comparacion entre ambas es: "+actividad.getFecha().compareTo(fecha));
 
-
-                //ARREGLAR ESTO
-                if(actividad.getTipo().equals("Tarea"))
+                //Vemos si la actividad es una prueba y si la fecha actual no es mayor que la fecha de la actividad
+                if(actividad.getTipo().equals("Tarea") && (actividad.getFecha().compareTo(fecha) != -1))
                 {
+                    Log.i("PRUEBA","Entra y crea una actividad");
                     crearInformacionTareas(actividad);
-                }else{
-
                 }
             }
 
@@ -134,7 +144,7 @@ public class HomeworkActivity extends AppCompatActivity {
         textoFecha.setTextColor(Color.parseColor("#FFFFFF"));
 
         //SE NECESITA CAMBIAR A DP
-        textoFecha.setTextSize(35);
+        textoFecha.setTextSize(30);
 
         layoutFecha.addView(textoFecha,params);
 
