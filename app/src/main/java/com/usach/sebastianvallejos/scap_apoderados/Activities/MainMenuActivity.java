@@ -22,6 +22,7 @@ public class MainMenuActivity extends AppCompatActivity {
     private ImageButton botonExams;
     private Alumnos alumnoActual = new Alumnos();
     private Intent intent;
+    private String idPadre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
     private void crearAlumno()
     {
+        idPadre = intent.getStringExtra("idPadre");
         alumnoActual.setId(intent.getStringExtra("id"));
         alumnoActual.setNombre(intent.getStringExtra("nombre"));
         alumnoActual.setColegio(intent.getStringExtra("colegio"));
@@ -68,6 +70,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
                 try
                 {
+                    intent.putExtra("idPadre",idPadre);
                     intent.putExtra("id",alumnoActual.getId());
                     intent.putExtra("nombre",alumnoActual.getNombre());
                     intent.putExtra("aPaterno",alumnoActual.getApellidoPaterno());

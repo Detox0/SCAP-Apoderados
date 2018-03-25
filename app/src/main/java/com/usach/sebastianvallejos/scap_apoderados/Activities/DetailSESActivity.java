@@ -12,6 +12,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.usach.sebastianvallejos.scap_apoderados.Models.Ses;
 import com.usach.sebastianvallejos.scap_apoderados.R;
 
@@ -78,35 +79,12 @@ public class DetailSESActivity extends AppCompatActivity {
 
                 final DatabaseReference positivoRef = mdDataBase.getReference(colegio);
 
-                positivoRef.child("ses/"+ses.getId()).addChildEventListener(new ChildEventListener() {
+                positivoRef.child("ses").child(ses.getId()).child("positivas").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-                        Ses actividad = dataSnapshot.getValue(Ses.class);
-
-                        //Obtener las positivas y aumentar en 1 su valor
-                        Integer positivas = Integer.valueOf(actividad.getPositivas());
-                        positivas ++;
-                        positivoRef.child("ses/"+ses.getId()).child("positivas").setValue(positivas.toString());
-
-                        //Volvemos al menu anterior
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        long positivas = (long) dataSnapshot.getValue();
+                        positivoRef.child("ses").child(ses.getId()).child("positivas").setValue(positivas+1);
                         finish();
-
-                    }
-
-                    @Override
-                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                    }
-
-                    @Override
-                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
                     }
 
                     @Override
@@ -125,37 +103,15 @@ public class DetailSESActivity extends AppCompatActivity {
         negativo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 final DatabaseReference negativoRef = mdDataBase.getReference(colegio);
 
-                negativoRef.child("ses/"+ses.getId()).addChildEventListener(new ChildEventListener() {
+                negativoRef.child("ses").child(ses.getId()).child("negativas").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-                        Ses actividad = dataSnapshot.getValue(Ses.class);
-
-                        //Obtener las positivas y aumentar en 1 su valor
-                        Integer negativas = Integer.valueOf(actividad.getNegativas());
-                        negativas ++;
-                        negativoRef.child("ses/"+ses.getId()).child("negativas").setValue(negativas.toString());
-
-                        //Volvemos al menu anterior
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        long negativas = (long) dataSnapshot.getValue();
+                        negativoRef.child("ses").child(ses.getId()).child("negativas").setValue(negativas+1);
                         finish();
-
-                    }
-
-                    @Override
-                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                    }
-
-                    @Override
-                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
                     }
 
                     @Override

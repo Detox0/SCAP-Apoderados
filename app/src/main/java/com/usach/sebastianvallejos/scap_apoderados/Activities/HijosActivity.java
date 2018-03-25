@@ -208,7 +208,7 @@ public class HijosActivity extends AppCompatActivity {
                     //Se guardan datos para el siguiente intent
                     intent = new Intent(HijosActivity.this,MainMenuActivity.class);
 
-                    //intent.putExtra("idPadre",parent.getId());
+                    intent.putExtra("idPadre",parent.getId());
                     intent.putExtra("id",student.getId());
                     intent.putExtra("nombre",student.getNombre());
                     intent.putExtra("seccion",student.getSeccion());

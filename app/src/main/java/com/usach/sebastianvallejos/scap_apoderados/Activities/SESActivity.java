@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.usach.sebastianvallejos.scap_apoderados.Models.Alumnos;
 import com.usach.sebastianvallejos.scap_apoderados.Models.Ses;
 import com.usach.sebastianvallejos.scap_apoderados.R;
@@ -29,6 +31,7 @@ public class SESActivity extends AppCompatActivity {
     private LinearLayout ses_fechas_layout;
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     private Intent intent;
+    private String idPadre;
     private Alumnos alumno = new Alumnos();
 
     @Override
@@ -45,6 +48,7 @@ public class SESActivity extends AppCompatActivity {
 
     private void crearAlumno()
     {
+        idPadre = intent.getStringExtra("idPadre");
         alumno.setId(intent.getStringExtra("id"));
         alumno.setSeccion(intent.getStringExtra("seccion"));
         alumno.setColegio(intent.getStringExtra("colegio"));
@@ -66,8 +70,8 @@ public class SESActivity extends AppCompatActivity {
 
                 actSes.setId(dataSnapshot.getKey());
 
-                crearBoton(actSes);
-
+                //Verificamos si el apoderado ya respondió esta pregunta
+                verificarActividadSes(actSes);
             }
 
             @Override
@@ -114,7 +118,7 @@ public class SESActivity extends AppCompatActivity {
         textoFecha.setTextColor(Color.parseColor("#FFFFFF"));
 
         //SE NECESITA CAMBIAR A DP
-        textoFecha.setTextSize(35);
+        textoFecha.setTextSize(30);
 
         ses_fechas_layout.addView(textoFecha,params);
     }
@@ -130,6 +134,7 @@ public class SESActivity extends AppCompatActivity {
 
                 try {
 
+                    intent.putExtra("idPadre",idPadre);
                     intent.putExtra("id", actividad.getId());
                     intent.putExtra("profesor", actividad.getProfesor());
                     intent.putExtra("materia", actividad.getMateria());
@@ -144,6 +149,40 @@ public class SESActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),""+e.toString(),Toast.LENGTH_LONG).show();
 
                 }
+            }
+        });
+    }
+
+    private void verificarActividadSes(final Ses actividad)
+    {
+        DatabaseReference verificarRef = mDatabase.getReference(alumno.getColegio());
+
+        //Consultamos en la BD si el ID del apoderado ya se encuentra en la lista de apoderados que hicieron la actividad
+        verificarRef.child("ses").child(actividad.getId()).child("apoderados").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Boolean verificador = true;
+
+                for(DataSnapshot data: dataSnapshot.getChildren())
+                {
+                    if(data.getKey().toString().equals(idPadre))
+                    {
+                        Log.i("PRUEBA","Ya se realizó la actividad.");
+                        verificador = false;
+                    }
+                }
+
+                if(verificador)
+                {
+                    Log.i("PRUEBA","No se ha realizado la actividad.");
+                    crearBoton(actividad);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
     }

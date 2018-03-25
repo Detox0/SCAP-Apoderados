@@ -77,7 +77,7 @@ public class ExamActivity extends AppCompatActivity {
                 Actividad actividad = dataSnapshot.getValue(Actividad.class);
 
                 //Vemos si la actividad es una prueba y si la fecha actual no es mayor que la fecha de la actividad
-                if(actividad.getTipo().equals("Pruebas") && (actividad.getFecha().compareTo(fecha) != -1))
+                if(actividad.getTipo().equals("Prueba") && (actividad.getFecha().compareTo(fecha) != -1))
                 {
                     crearInformacionVista(actividad);
                 }

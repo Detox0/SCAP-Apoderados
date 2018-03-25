@@ -59,6 +59,7 @@ public class HomeworkActivity extends AppCompatActivity {
 
     }
 
+    //Obtenemos los datos guardados anteriormente
     private void crearAlumno(Intent in)
     {
         alumnoActual.setId(in.getStringExtra("id"));
