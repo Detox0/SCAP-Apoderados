@@ -9,9 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.MainMenuActivity">
-
-        </activity>
+        <activity android:name=".Activities.MainMenuActivity"></activity>
         <activity android:name=".Activities.HomeworkActivity" />
         <activity android:name=".Activities.ExamActivity" />
         <activity android:name=".Activities.MaterialActivity" />
@@ -23,10 +21,30 @@
         <activity android:name=".Activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.HijosActivity"></activity>
+        <activity android:name=".Activities.HijosActivity" />
+        <activity android:name=".Activities.FinalSESActivity"></activity>
+
+
+        <service
+            android:name=".FireBaseNotifications">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+
+        <service
+            android:name=".MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+
+
     </application>
 
 </manifest>

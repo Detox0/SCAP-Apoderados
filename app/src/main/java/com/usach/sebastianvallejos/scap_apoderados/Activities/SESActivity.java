@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.usach.sebastianvallejos.scap_apoderados.Models.Alumnos;
+import com.usach.sebastianvallejos.scap_apoderados.Models.Answers;
 import com.usach.sebastianvallejos.scap_apoderados.Models.Ses;
 import com.usach.sebastianvallejos.scap_apoderados.R;
 
@@ -133,17 +134,20 @@ public class SESActivity extends AppCompatActivity {
                 Intent intent = new Intent(SESActivity.this,DetailSESActivity.class);
 
                 try {
-
-                    intent.putExtra("idPadre",idPadre);
+                    intent.putExtra("idPadre", idPadre);
+                    intent.putExtra("nombre", alumno.getNombre());
+                    intent.putExtra("apellido_paterno_alumno", alumno.getApellidoPaterno());
+                    intent.putExtra("apellido_materno_alumno",alumno.getApellidoMaterno());
                     intent.putExtra("id", actividad.getId());
                     intent.putExtra("profesor", actividad.getProfesor());
                     intent.putExtra("materia", actividad.getMateria());
                     intent.putExtra("fecha", actividad.getFecha());
                     intent.putExtra("descripcion", actividad.getDescripcion());
                     intent.putExtra("colegio",alumno.getColegio());
+                    intent.putExtra("seccion", alumno.getSeccion());
+                    intent.putExtra("idAlumno", alumno.getId());
 
                     startActivity(intent);
-
                 }
                 catch (Exception e) {
                     Toast.makeText(getApplicationContext(),""+e.toString(),Toast.LENGTH_LONG).show();
@@ -153,12 +157,13 @@ public class SESActivity extends AppCompatActivity {
         });
     }
 
+    //Revisar esta funcion
     private void verificarActividadSes(final Ses actividad)
     {
         DatabaseReference verificarRef = mDatabase.getReference(alumno.getColegio());
 
         //Consultamos en la BD si el ID del apoderado ya se encuentra en la lista de apoderados que hicieron la actividad
-        verificarRef.child("ses").child(actividad.getId()).child("apoderados").addListenerForSingleValueEvent(new ValueEventListener() {
+        verificarRef.child("ses").child(actividad.getId()).child("respuestas").orderByChild("idApoderado").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -166,9 +171,10 @@ public class SESActivity extends AppCompatActivity {
 
                 for(DataSnapshot data: dataSnapshot.getChildren())
                 {
-                    if(data.getKey().toString().equals(idPadre))
+                    Answers resp = data.getValue(Answers.class);
+
+                    if(resp.getIdApoderado().equals(idPadre))
                     {
-                        Log.i("PRUEBA","Ya se realizó la actividad.");
                         verificador = false;
                     }
                 }

@@ -44,7 +44,6 @@ public class DetailHomeworkActivity extends AppCompatActivity {
         TextView materia = (TextView) findViewById(R.id.detalle_tareas_materia);
         TextView fecha = (TextView) findViewById(R.id.detalle_tareas_fecha);
         TextView descripcion = (TextView) findViewById(R.id.descripcion_homework);
-
         profesor.setText(actividad.getProfesor());
         materia.setText(actividad.getMateria());
         fecha.setText(actividad.getFecha());

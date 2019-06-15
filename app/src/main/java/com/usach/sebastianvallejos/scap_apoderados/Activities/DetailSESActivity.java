@@ -3,9 +3,12 @@ package com.usach.sebastianvallejos.scap_apoderados.Activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -29,8 +32,13 @@ public class DetailSESActivity extends AppCompatActivity {
     private TextView fecha_ses;
     private TextView descripcion_ses;
     private Button positivo;
-    private Button negativo;
     private String colegio;
+    private String nombre_alumno;
+    private String apellido_paterno_alumno;
+    private String apellido_materno_alumno;
+    private String idPadre;
+    private String idAlumno;
+    private String seccion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,23 +52,28 @@ public class DetailSESActivity extends AppCompatActivity {
         fecha_ses = (TextView) findViewById(R.id.fecha_ses);
         descripcion_ses = (TextView) findViewById(R.id.descripcion_ses);
         positivo = (Button) findViewById(R.id.ses_boton_positivo);
-        negativo = (Button) findViewById(R.id.ses_boton_negativo);
 
-        crearActividad();
+        obtenerData();
     }
 
-    private void crearActividad()
+    private void obtenerData()
     {
         ses.setDescripcion(intent.getStringExtra("descripcion"));
         ses.setProfesor(intent.getStringExtra("profesor"));
         ses.setFecha(intent.getStringExtra("fecha"));
         ses.setDescripcion(intent.getStringExtra("descripcion"));
         ses.setId(intent.getStringExtra("id"));
-        colegio = intent.getStringExtra("colegio");
+        ses.setMateria(intent.getStringExtra("materia"));
+        this.colegio = intent.getStringExtra("colegio");
+        this.nombre_alumno = intent.getStringExtra("nombre");
+        this.apellido_paterno_alumno = intent.getStringExtra("apellido_paterno_alumno");
+        this.apellido_materno_alumno = intent.getStringExtra("apellido_materno_alumno");
+        this.idPadre = intent.getStringExtra("idPadre");
+        this.idAlumno = intent.getStringExtra("idAlumno");
+        this.seccion = intent.getStringExtra("seccion");
 
         setearVista();
         setearBotonPositivo();
-        setearBotonNegativo();
     }
 
     private void setearVista()
@@ -73,54 +86,28 @@ public class DetailSESActivity extends AppCompatActivity {
 
     private void setearBotonPositivo()
     {
+
+
         positivo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                final DatabaseReference positivoRef = mdDataBase.getReference(colegio);
-
-                positivoRef.child("ses").child(ses.getId()).child("positivas").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        long positivas = (long) dataSnapshot.getValue();
-                        positivoRef.child("ses").child(ses.getId()).child("positivas").setValue(positivas+1);
-                        finish();
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
+                Intent intent = new Intent(DetailSESActivity.this, FinalSESActivity.class);
+                try{
+                    intent.putExtra("idPadre", idPadre);
+                    intent.putExtra("idSES", ses.getId());
+                    intent.putExtra("nombre_alumno", nombre_alumno);
+                    intent.putExtra("apellido_paterno_alumno", apellido_paterno_alumno);
+                    intent.putExtra("apellido_materno_alumno", apellido_materno_alumno);
+                    intent.putExtra("colegio", colegio);
+                    intent.putExtra("idAlumno", idAlumno);
+                    intent.putExtra("seccion", seccion);
+                    startActivity(intent);
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(),""+e.toString(),Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
 
-    private void setearBotonNegativo()
-    {
-
-        negativo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                final DatabaseReference negativoRef = mdDataBase.getReference(colegio);
-
-                negativoRef.child("ses").child(ses.getId()).child("negativas").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        long negativas = (long) dataSnapshot.getValue();
-                        negativoRef.child("ses").child(ses.getId()).child("negativas").setValue(negativas+1);
-                        finish();
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-            }
-        });
-
-    }
 }

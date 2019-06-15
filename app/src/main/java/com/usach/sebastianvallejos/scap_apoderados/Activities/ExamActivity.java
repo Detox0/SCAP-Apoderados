@@ -59,7 +59,6 @@ public class ExamActivity extends AppCompatActivity {
         alumno.setColegio(intent.getStringExtra("colegio"));
         alumno.setApellidoPaterno(intent.getStringExtra("aPaterno"));
         alumno.setApellidoMaterno(intent.getStringExtra("aMaterno"));
-
         obtenerActividades(alumno.getColegio(),alumno.getSeccion());
     }
 

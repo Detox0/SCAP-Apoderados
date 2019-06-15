@@ -61,13 +61,10 @@ public class MainMenuActivity extends AppCompatActivity {
     //Aqui se le dice al boton SES donde debe dirigirse una vez pulsado y se le entregan algunos atributos
     private void activarBotonSes(ImageButton boton)
     {
-
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(MainMenuActivity.this , SESActivity.class);
-
                 try
                 {
                     intent.putExtra("idPadre",idPadre);
@@ -77,8 +74,6 @@ public class MainMenuActivity extends AppCompatActivity {
                     intent.putExtra("aMaterno",alumnoActual.getApellidoMaterno());
                     intent.putExtra("seccion",alumnoActual.getSeccion());
                     intent.putExtra("colegio",alumnoActual.getColegio());
-
-
                     startActivity(intent);
                 }
                 catch (Exception e)
@@ -87,7 +82,6 @@ public class MainMenuActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     //Aqui se le dice al boton Exams donde debe dirigirse una vez pulsado y se le entregan algunos atributos

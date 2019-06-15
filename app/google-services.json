@@ -93,6 +93,50 @@
           "status": 2
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:607831983369:android:11db9fb928e35fd4",
+        "android_client_info": {
+          "package_name": "com.usach.sebastianvallejos.scapprofesores"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "607831983369-da602r6o4q0e7s51vq2gt79vb5labddr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.usach.sebastianvallejos.scapprofesores",
+            "certificate_hash": "be9501dfd5c3b65e3fc6cd8bd257e76d84ee8f39"
+          }
+        },
+        {
+          "client_id": "607831983369-53nnqsbhv4u8jm6g9ibkab4f928854u0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmaB22SxmrgOStZxaivAc6tkrylshHMlg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "607831983369-53nnqsbhv4u8jm6g9ibkab4f928854u0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
     }
   ],
   "configuration_version": "1"

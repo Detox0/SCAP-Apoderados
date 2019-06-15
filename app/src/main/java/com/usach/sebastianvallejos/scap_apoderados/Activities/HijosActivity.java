@@ -153,29 +153,26 @@ public class HijosActivity extends AppCompatActivity {
     public void obtenerHijos()
     {
         final DatabaseReference apoderadosRef = mDataBase.getReference(spinnerColegios.getSelectedItem().toString());
-
-        apoderadosRef.child("apoderados/"+parent.getId().toString()+"/hijos").orderByChild("nombre").addListenerForSingleValueEvent(new ValueEventListener() {
+        apoderadosRef.child("apoderados/"+parent.getId().toString()+"/hijos").orderByChild("nombre").
+                addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 for(DataSnapshot data: dataSnapshot.getChildren())
                 {
                     Alumnos alumno = data.getValue(Alumnos.class);
                     alumnos.add(alumno);
                     nombreAlumnos.add(alumno.getNombre());
                 }
-
                 //Le entregamos los datos al spinner
                 alumnosAdapter = new ArrayAdapter<String>(HijosActivity.this, android.R.layout.simple_spinner_item, nombreAlumnos);
                 alumnosAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 alumnosAdapter.notifyDataSetChanged();
                 spinnerAlumnos.setAdapter(alumnosAdapter);
-
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                Toast.makeText(HijosActivity.this, "Usuario o contraseña inválidos.",
+                        Toast.LENGTH_SHORT).show();
             }
         });
     }

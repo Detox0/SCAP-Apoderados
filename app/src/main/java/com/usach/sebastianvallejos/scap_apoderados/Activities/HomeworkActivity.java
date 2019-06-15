@@ -125,31 +125,24 @@ public class HomeworkActivity extends AppCompatActivity {
         //Primero ubicamos los LinearLayouts correspondiente a los lugares donde se entregara la informacion
         LinearLayout layoutBoton = (LinearLayout) findViewById(R.id.materia_tareas);
         LinearLayout layoutFecha = (LinearLayout) findViewById(R.id.fecha_tareas);
-
         //Parametros necesarios para colocar los elementos nuevso en la vista
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-
         //Se crea el boton y se le asigna un Listener
         Button botonVista = new Button(this);
         botonVista.setText(actividad.getMateria());
         setearListener(botonVista,actividad);
         layoutBoton.addView(botonVista,params);
-
         //Se crea un TextView para rellenarlo con la fecha
         TextView textoFecha = new TextView(this);
         textoFecha.setText(actividad.getFecha());
         params.gravity = Gravity.CENTER_HORIZONTAL;
         textoFecha.setTextColor(Color.parseColor("#FFFFFF"));
-
         //SE NECESITA CAMBIAR A DP
         textoFecha.setTextSize(30);
-
         layoutFecha.addView(textoFecha,params);
-
-
     }
 
     //Listener para que cada boton tenga una accion
